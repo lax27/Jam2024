@@ -49,4 +49,15 @@ public class InputManager : MonoBehaviour
         timeSiceBoostPressed = 0;
         Debug.Log("Boost");
     }
+
+    public float GetJumpButtonPressed()
+    {
+        return timeSiceJumpPressed;
+    }
+
+    public float GetBoostButtonPressed()
+    {
+        return timeSiceBoostPressed;
+    }
+
 }
