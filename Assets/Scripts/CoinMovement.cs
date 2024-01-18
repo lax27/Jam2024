@@ -35,19 +35,20 @@ public class CoinMovement : MonoBehaviour
     {
 
         Debug.DrawRay(transform.position, parent.transform.up * -1 * rayCastLong, Color.red);
-
-
         RaycastHit2D hit = Physics2D.Raycast(transform.position, parent.transform.up * -1, rayCastLong);
-        
-            if (hit.transform.tag != "Ground")
-            {
-                isGrounded = false;
-            }
-            else
+
+        if (hit.collider != null)
+        {
+            if (hit.transform.tag == "Ground")
             {
                 isGrounded = true;
             }
-        
+        }
+        else
+        {
+            isGrounded = false;
+        }
+
 
         if (InputManager._INPUT_MANAGER.GetJumpButtonPressed() == 0 && isGrounded)
         {
