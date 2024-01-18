@@ -5,33 +5,71 @@ using UnityEngine.SocialPlatforms;
 
 public class CoinMovement : MonoBehaviour
 {
+    [Header("References")]
+    private GameObject parent;
+    private Rigidbody2D rb;
+
+    [Header("Vars")]
     private bool canJump = false;
     private bool canDash = false;
-    private Rigidbody2D rb;
+    private bool isGrounded = true;
+    private bool haveCoolDown = true;
+    private float currentCoolDownTimer;
+
+    [SerializeField] private float coolDownTimer = 2f;
     [SerializeField] private float jumpForce;
     [SerializeField] private float torqueForce;
-    private GameObject parent;
+
+    [SerializeField, Min(1)] private float rayCastLong = 1;
+    private LayerMask ingoreLayerMask;
    
 
     private void Awake()
     {
         parent = GameObject.Find("Mondo");
         rb = GetComponent<Rigidbody2D>();
+        currentCoolDownTimer = coolDownTimer;
     }
 
     private void Update()
     {
-        if (InputManager._INPUT_MANAGER.GetJumpButtonPressed() == 0)
+
+        Debug.DrawRay(transform.position, parent.transform.up * -1 * rayCastLong, Color.red);
+
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, parent.transform.up * -1, rayCastLong);
+        
+            if (hit.transform.tag != "Ground")
+            {
+                isGrounded = false;
+            }
+            else
+            {
+                isGrounded = true;
+            }
+        
+
+        if (InputManager._INPUT_MANAGER.GetJumpButtonPressed() == 0 && isGrounded)
         {
             canJump = true;
         }
 
-        if (InputManager._INPUT_MANAGER.GetBoostButtonPressed() == 0)
+        if (InputManager._INPUT_MANAGER.GetBoostButtonPressed() == 0 && haveCoolDown)
         {
             canDash = true;
+            haveCoolDown = false;
         }
 
-  
+        if (!haveCoolDown)
+        {
+            currentCoolDownTimer -= Time.deltaTime;
+
+            if(currentCoolDownTimer <= 0)
+            {
+                haveCoolDown = true;
+                currentCoolDownTimer = coolDownTimer;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -48,6 +86,8 @@ public class CoinMovement : MonoBehaviour
             rb.AddTorque(-torqueForce, ForceMode2D.Impulse);
             canDash = false;
         }
+
+
 
     }
 }

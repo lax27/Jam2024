@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3227092769718840227}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Mondo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,6 +96,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Moneda
       objectReference: {fileID: 0}
+    - target: {fileID: 4993607576954180327, guid: 73057c63de059fc46aceb75fea8d673d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5009717315434832253, guid: 73057c63de059fc46aceb75fea8d673d,
         type: 3}
       propertyPath: m_RootOrder
@@ -161,11 +166,11 @@ PrefabInstance:
       propertyPath: jumpForce
       value: 400
       objectReference: {fileID: 0}
-    - target: {fileID: 9082748635617433894, guid: 73057c63de059fc46aceb75fea8d673d,
+    - target: {fileID: 9118451726636386035, guid: 73057c63de059fc46aceb75fea8d673d,
         type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 40ecdc852b9241c45874ffa82113719b, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

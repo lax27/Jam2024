@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 558620782954918987}
   - component: {fileID: 9082748635617433894}
   - component: {fileID: 2148982900023324249}
-  - component: {fileID: 8144496493567265250}
   m_Layer: 0
   m_Name: Moneda
   m_TagString: Untagged
@@ -34,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 4392544663144710199}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &558620782954918987
 MonoBehaviour:
@@ -48,7 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d6d3d66d8f59f4cbd09c372db395d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 10
+  coolDownTimer: 10
+  jumpForce: 400
+  torqueForce: 200
+  rayCastLong: 1
 --- !u!58 &9082748635617433894
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -58,7 +60,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 4993607576954180327}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 40ecdc852b9241c45874ffa82113719b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -111,19 +113,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8144496493567265250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4993607576954180327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05d6d3d66d8f59f4cbd09c372db395d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 0
 --- !u!1 &9118451726636386035
 GameObject:
   m_ObjectHideFlags: 0
