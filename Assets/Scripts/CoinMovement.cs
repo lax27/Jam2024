@@ -16,6 +16,7 @@ public class CoinMovement : MonoBehaviour
     private bool haveCoolDown = true;
     private float currentCoolDownTimer;
     private bool resetTorque;
+    private bool rightLeft;
 
     [SerializeField] private float coolDownTimer = 2f;
     [SerializeField] private float jumpForce;
@@ -35,6 +36,7 @@ public class CoinMovement : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(rightLeft);
 
         if (resetTorque)
         {
@@ -44,6 +46,16 @@ public class CoinMovement : MonoBehaviour
             {
                 resetTorque = false;
             }
+        }
+
+        if (InputManager._INPUT_MANAGER.GetRightButtonPressed() == 0)
+        {
+            rightLeft = false;
+        }
+
+        if (InputManager._INPUT_MANAGER.GetLeftButtonPressed() == 0)
+        {
+            rightLeft = true;
         }
 
         Debug.DrawRay(transform.position, parent.transform.up * -1 * rayCastLong, Color.red);
@@ -96,10 +108,19 @@ public class CoinMovement : MonoBehaviour
         }
         if (canDash)
         {
-            rb.AddTorque(-torqueForce, ForceMode2D.Impulse);
+            if (!rightLeft)
+            {
+                rb.AddTorque(-torqueForce, ForceMode2D.Impulse);
+
+            }
+            else
+            {
+                rb.AddTorque(torqueForce, ForceMode2D.Impulse);
+
+            }
             canDash = false;
         }
-
+   
 
 
     }

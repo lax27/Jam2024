@@ -10,6 +10,8 @@ public class InputManager : MonoBehaviour
 
     private float timeSiceJumpPressed = 0f;
     private float timeSiceBoostPressed = 0f;
+    private float rightPressed = 0f;
+    private float leftPressed = 0f;
     private void Awake()
     {
         if (_INPUT_MANAGER != null && _INPUT_MANAGER != this)
@@ -23,6 +25,8 @@ public class InputManager : MonoBehaviour
 
             playerInputs.Character.Jump.performed += JumpButtonPressed;
             playerInputs.Character.Boost.performed += BoostButtonPressed;
+            playerInputs.Character.Rigth.performed += RightButtonPressed;
+            playerInputs.Character.Left.performed += LeftButtonPressed;
 
 
             _INPUT_MANAGER = this;
@@ -35,6 +39,9 @@ public class InputManager : MonoBehaviour
 
         timeSiceJumpPressed += Time.deltaTime;
         timeSiceBoostPressed += Time.deltaTime;
+        rightPressed += Time.deltaTime;
+        leftPressed += Time.deltaTime;
+
         InputSystem.Update();
     }
 
@@ -49,6 +56,29 @@ public class InputManager : MonoBehaviour
         timeSiceBoostPressed = 0;
         Debug.Log("Boost");
     }
+
+    private void RightButtonPressed(InputAction.CallbackContext context)
+    {
+        rightPressed = 0f;
+        Debug.Log("D");
+    }
+
+    private void LeftButtonPressed(InputAction.CallbackContext context)
+    {
+        leftPressed = 0f;
+        Debug.Log("A");
+    }
+
+    public float GetRightButtonPressed()
+    {
+        return rightPressed;
+    }
+
+    public float GetLeftButtonPressed()
+    {
+        return leftPressed;
+    }
+
 
     public float GetJumpButtonPressed()
     {

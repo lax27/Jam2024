@@ -44,6 +44,24 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rigth"",
+                    ""type"": ""Button"",
+                    ""id"": ""92ca026f-3e6e-4774-8447-58fd5a39bbb8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""e869fed4-259d-4f42-8d66-0acc6c4fa796"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +86,28 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""Boost"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""797389c6-1c30-401f-971a-d98df3781a31"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rigth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c76a903-9127-46df-bd19-77ad90104abb"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -78,6 +118,8 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_Character = asset.FindActionMap("Character", throwIfNotFound: true);
         m_Character_Jump = m_Character.FindAction("Jump", throwIfNotFound: true);
         m_Character_Boost = m_Character.FindAction("Boost", throwIfNotFound: true);
+        m_Character_Rigth = m_Character.FindAction("Rigth", throwIfNotFound: true);
+        m_Character_Left = m_Character.FindAction("Left", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -141,12 +183,16 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private List<ICharacterActions> m_CharacterActionsCallbackInterfaces = new List<ICharacterActions>();
     private readonly InputAction m_Character_Jump;
     private readonly InputAction m_Character_Boost;
+    private readonly InputAction m_Character_Rigth;
+    private readonly InputAction m_Character_Left;
     public struct CharacterActions
     {
         private @PlayerActions m_Wrapper;
         public CharacterActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_Character_Jump;
         public InputAction @Boost => m_Wrapper.m_Character_Boost;
+        public InputAction @Rigth => m_Wrapper.m_Character_Rigth;
+        public InputAction @Left => m_Wrapper.m_Character_Left;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -162,6 +208,12 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Boost.started += instance.OnBoost;
             @Boost.performed += instance.OnBoost;
             @Boost.canceled += instance.OnBoost;
+            @Rigth.started += instance.OnRigth;
+            @Rigth.performed += instance.OnRigth;
+            @Rigth.canceled += instance.OnRigth;
+            @Left.started += instance.OnLeft;
+            @Left.performed += instance.OnLeft;
+            @Left.canceled += instance.OnLeft;
         }
 
         private void UnregisterCallbacks(ICharacterActions instance)
@@ -172,6 +224,12 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Boost.started -= instance.OnBoost;
             @Boost.performed -= instance.OnBoost;
             @Boost.canceled -= instance.OnBoost;
+            @Rigth.started -= instance.OnRigth;
+            @Rigth.performed -= instance.OnRigth;
+            @Rigth.canceled -= instance.OnRigth;
+            @Left.started -= instance.OnLeft;
+            @Left.performed -= instance.OnLeft;
+            @Left.canceled -= instance.OnLeft;
         }
 
         public void RemoveCallbacks(ICharacterActions instance)
@@ -193,5 +251,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     {
         void OnJump(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
+        void OnRigth(InputAction.CallbackContext context);
+        void OnLeft(InputAction.CallbackContext context);
     }
 }
