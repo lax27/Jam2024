@@ -9,6 +9,7 @@ public class CoinMovement : MonoBehaviour
     private bool canDash = false;
     private Rigidbody2D rb;
     [SerializeField] private float jumpForce;
+    [SerializeField] private float torqueForce;
     private GameObject parent;
    
 
@@ -44,7 +45,7 @@ public class CoinMovement : MonoBehaviour
         }
         if (canDash)
         {
-            rb.AddTorque(-jumpForce,ForceMode2D.Impulse);
+            rb.AddTorque(-torqueForce, ForceMode2D.Impulse);
             canDash = false;
         }
 
