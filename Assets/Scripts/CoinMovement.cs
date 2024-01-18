@@ -15,10 +15,12 @@ public class CoinMovement : MonoBehaviour
     private bool isGrounded = true;
     private bool haveCoolDown = true;
     private float currentCoolDownTimer;
+    private bool resetTorque;
 
     [SerializeField] private float coolDownTimer = 2f;
     [SerializeField] private float jumpForce;
     [SerializeField] private float torqueForce;
+
 
     [SerializeField, Min(1)] private float rayCastLong = 1;
     private LayerMask ingoreLayerMask;
@@ -33,6 +35,16 @@ public class CoinMovement : MonoBehaviour
 
     private void Update()
     {
+
+        if (resetTorque)
+        {
+            rb.angularVelocity = 0;
+
+            if (rb.velocity.x == 0 && rb.velocity.y == 0)
+            {
+                resetTorque = false;
+            }
+        }
 
         Debug.DrawRay(transform.position, parent.transform.up * -1 * rayCastLong, Color.red);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, parent.transform.up * -1, rayCastLong);
@@ -90,5 +102,10 @@ public class CoinMovement : MonoBehaviour
 
 
 
+    }
+
+    public void SetResetTorque()
+    {
+        resetTorque = true;
     }
 }
