@@ -8,6 +8,7 @@ public class CoinMovement : MonoBehaviour
     [Header("References")]
     private GameObject parent;
     private Rigidbody2D rb;
+    private AudioSource audioSource;
 
     [Header("Vars")]
     private bool canJump = false;
@@ -19,9 +20,11 @@ public class CoinMovement : MonoBehaviour
     private bool rightLeft;
     private float coyoteTime;
 
+
     [SerializeField] private float coolDownTimer = 2f;
     [SerializeField] private float jumpForce;
     [SerializeField] private float torqueForce;
+    [SerializeField] private AudioClip Jumpclip;
 
 
     [SerializeField, Min(1)] private float rayCastLong = 1;
@@ -88,6 +91,7 @@ public class CoinMovement : MonoBehaviour
         if (InputManager._INPUT_MANAGER.GetJumpButtonPressed() == 0 && coyoteTime <= 0.2f)
         {
             canJump = true;
+            audioSource.PlayOneShot();
         }
 
         if (InputManager._INPUT_MANAGER.GetBoostButtonPressed() == 0 && haveCoolDown)
