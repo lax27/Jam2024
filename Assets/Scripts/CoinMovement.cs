@@ -25,6 +25,7 @@ public class CoinMovement : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float torqueForce;
     [SerializeField] private AudioClip Jumpclip;
+    [SerializeField] private AudioClip Boostclip;
 
 
     [SerializeField, Min(1)] private float rayCastLong = 1;
@@ -35,6 +36,7 @@ public class CoinMovement : MonoBehaviour
     {
         parent = GameObject.Find("Mondo");
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         currentCoolDownTimer = coolDownTimer;
     }
 
@@ -96,6 +98,8 @@ public class CoinMovement : MonoBehaviour
 
         if (InputManager._INPUT_MANAGER.GetBoostButtonPressed() == 0 && haveCoolDown)
         {
+            audioSource.PlayOneShot(Boostclip);
+
             canDash = true;
             haveCoolDown = false;
         }
