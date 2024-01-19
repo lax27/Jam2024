@@ -91,7 +91,7 @@ public class CoinMovement : MonoBehaviour
         if (InputManager._INPUT_MANAGER.GetJumpButtonPressed() == 0 && coyoteTime <= 0.2f)
         {
             canJump = true;
-            audioSource.PlayOneShot();
+            audioSource.PlayOneShot(Jumpclip);
         }
 
         if (InputManager._INPUT_MANAGER.GetBoostButtonPressed() == 0 && haveCoolDown)
