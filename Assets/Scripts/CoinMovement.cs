@@ -140,4 +140,24 @@ public class CoinMovement : MonoBehaviour
     {
         resetTorque = true;
     }
+
+    public bool GetIsRigthLeft()
+    {
+        return rightLeft;
+    }
+
+    public float GetCurrentCooldown()
+    {
+        return currentCoolDownTimer;
+    }
+
+    public float GetCoolDown()
+    {
+        return coolDownTimer;
+    }
+
+    public bool GetCanBoost()
+    {
+        return haveCoolDown;
+    }
 }
