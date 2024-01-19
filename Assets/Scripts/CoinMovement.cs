@@ -40,12 +40,12 @@ public class CoinMovement : MonoBehaviour
 
         if (resetTorque)
         {
-            rb.angularVelocity = 0;
+            rb.angularVelocity += 50;
 
-            if (rb.velocity.x == 0 && rb.velocity.y == 0)
-            {
-                resetTorque = false;
-            }
+
+
+
+
         }
 
         if (InputManager._INPUT_MANAGER.GetRightButtonPressed() == 0)
