@@ -17,6 +17,7 @@ public class CoinMovement : MonoBehaviour
     private float currentCoolDownTimer;
     private bool resetTorque;
     private bool rightLeft;
+    private float coyoteTime;
 
     [SerializeField] private float coolDownTimer = 2f;
     [SerializeField] private float jumpForce;
@@ -40,12 +41,20 @@ public class CoinMovement : MonoBehaviour
 
         if (resetTorque)
         {
-            rb.angularVelocity += 50;
+           
+            
+            if (!rightLeft)
+            {
+                rb.totalTorque = rb.totalTorque + 400f;
 
+            }
+            else
+            {
+                rb.totalTorque = rb.totalTorque - 400f;
 
+            }
 
-
-
+            resetTorque = false;
         }
 
         if (InputManager._INPUT_MANAGER.GetRightButtonPressed() == 0)
@@ -66,15 +75,17 @@ public class CoinMovement : MonoBehaviour
             if (hit.transform.tag == "Ground")
             {
                 isGrounded = true;
+                coyoteTime = 0;
             }
         }
         else
         {
             isGrounded = false;
+            coyoteTime += Time.deltaTime;
         }
 
 
-        if (InputManager._INPUT_MANAGER.GetJumpButtonPressed() == 0 && isGrounded)
+        if (InputManager._INPUT_MANAGER.GetJumpButtonPressed() == 0 && coyoteTime <= 0.2f)
         {
             canJump = true;
         }
@@ -110,12 +121,12 @@ public class CoinMovement : MonoBehaviour
         {
             if (!rightLeft)
             {
-                rb.AddTorque(-torqueForce, ForceMode2D.Impulse);
+                rb.AddTorque(-torqueForce, ForceMode2D.Force);
 
             }
             else
             {
-                rb.AddTorque(torqueForce, ForceMode2D.Impulse);
+                rb.AddTorque(torqueForce, ForceMode2D.Force);
 
             }
             canDash = false;
